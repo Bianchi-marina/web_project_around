@@ -1,0 +1,54 @@
+.profile {
+    max-width: 880px;
+    margin: 0 auto;
+    padding-top: 36px;
+    font-family: Inter;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.profile__view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile__img {
+    width: 128px;
+    height: 128px;
+    vertical-align: middle;
+    border-radius: 50%;
+}   
+.profile__description{
+    margin: 0 ;
+    margin-left: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+       
+    
+    
+}
+.profile__description-name {
+    margin: 0 auto;
+    font-size: 42px;
+    line-height: 1.2;
+    font-weight: 500px;
+    text-align: left;
+}
+
+.profile__description-job {
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: 400px;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    text-align: left;
+}
+
+.profile__edit-button{
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
