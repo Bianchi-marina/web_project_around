@@ -15,13 +15,18 @@
     flex-direction: row;
     align-items: center;
 }
-
+/* .profile__img-container {
+    width: 128px;
+    height: 128px;
+    vertical-align: middle;
+    border-radius: 50%;
+} */
 .profile__img {
     width: 128px;
     height: 128px;
     vertical-align: middle;
     border-radius: 50%;
-}   
+}
 .profile__description{
     margin: 0 ;
     margin-left: 10px;
