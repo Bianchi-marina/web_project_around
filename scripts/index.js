@@ -1,40 +1,22 @@
 let editPopupButton = document.querySelector(".profile__edit-button");
 let closePopupButton = document.querySelector(".popup__close-icon");
 let popup = document.querySelector(".popup");
+let saveButton = document.querySelector(".popup__button-submit");
 
 editPopupButton.addEventListener("click", function () {
-    popup.classList.add("popup_opened")
+    popup.classList.add("active")
 });
 
 closePopupButton.addEventListener("click", function() {
-    popup.classList.remove("popup_opened")
+    popup.classList.remove("active")
 });
 
-let formElement = document.querySelector("popup__form-input", function() {
-
-});
-
-// Vamos encontrar o formulário no DOM
-// let formElement = // Use o método querySelector()
-
-// Em seguida vem o handler do submit
-// ainda não vai enviar para lugar nenhum
-
-// Observe que o nome da função começa com um verbo
-// e descreve exatamente o que a função faz
+let form = document.querySelector("popup__form-input",
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     let nameInput = document.querySelector(".popup__form-input_name");
     let jobInput = document.querySelector(".popup__form-input_about");
+    popup.style.display = "none";
+});
 
-    // Pegue os valores de cada campo do valor da propriedade correspondente
-
-    // Selecione os elementos aos quais os valores dos campos serão inseridos
-
-    // Insira novos valores usando a
-    // propriedade textContent
-}
-
-// Conecte o handler ao formulário:
-// ele vai observar o evento de submit
-formElement.addEventListener('submit', handleProfileFormSubmit); 
+form.addEventListener('submit', handleProfileFormSubmit); 
