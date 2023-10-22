@@ -54,8 +54,15 @@
     transition: 0.2s;
 }
 
+.elements__button-like {
+    opacity: 100%;
+}
 .elements__button-like:hover {
+   opacity: 60%;
+}
+.elements__button-like:active {
     fill: black;
+    opacity: 100%;
     transition: 0.2s;
 }
 

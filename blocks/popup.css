@@ -34,6 +34,11 @@
 }
 .popup__close-icon-img {
     margin: 0 auto;
+    opacity: 100%;
+}
+.popup__close-icon-img:hover {
+    opacity: 60%;
+    transition: 0.2s;
 }
 .popup__form {
     width: 358px;
@@ -74,10 +79,15 @@
     max-width: 100%;
     padding: 13px 0;
     background-color: black;
+    opacity: 100%;
     color: white;
 font-size: 18px;
 font-weight: 400;
 border: 0;
+}
+.popup__button-submit:hover {
+   opacity: 80%;
+   transition: 0.2s;
 }
 
 @media screen and (max-width: 660px) {
