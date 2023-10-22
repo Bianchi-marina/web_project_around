@@ -1,5 +1,5 @@
 @import url(/styles/normalize.css);
-@import url(/vendor/fonts.css);
+@import url(/vendor/fonts/inter.css);
 @import url(/blocks/header.css);
 @import url(/blocks/profile.css);
 @import url(/blocks/elements.css);
@@ -7,7 +7,7 @@
 @import url(/blocks/popup.css);
 .page {
     margin: 0 auto;
-    font-family: Inter;
+    font-family: "Inter", Arial, sans-serif;
     background-color: black;
 }
 
