@@ -9,11 +9,15 @@
 }
  .elements__card {
  margin: 0;
+ list-style: none;
+ padding: 0;
   max-width: 282px;
  max-height: 361px; 
  border-radius: 10px;
 } 
-
+.elements__li {
+    list-style: none;
+}
 .elements__card-img {
     display: block;
  margin: 0;
