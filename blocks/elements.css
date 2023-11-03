@@ -17,6 +17,7 @@
 } 
 .elements__li {
     list-style: none;
+    position: relative;
 }
 .elements__card-img {
     display: block;
@@ -49,7 +50,7 @@
     font-family: Inter;
     font-weight: 900;
 }
-.elements__button-icon {
+.elements__like {
     margin: 0;
     padding: 0;
     border: 0;
@@ -68,6 +69,16 @@
     fill: black;
     opacity: 100%;
     transition: 0.2s;
+}
+
+.elements__trash {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
  @media screen and (max-width: 970px){
