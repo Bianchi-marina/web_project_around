@@ -23,6 +23,51 @@ function handleProfileFormSubmit(evt) {
     profileName.textContent = inputName.value;
     profileAbout.textContent = inputAbout.value;
     popup.classList.remove("popup_opened");
-  }
+}
   
-  form.addEventListener("submit", handleProfileFormSubmit);
+form.addEventListener("submit", handleProfileFormSubmit);
+
+function addCard (cardData) {
+    const templateCard = document.querySelector("#template-card");
+    const cardElement = templateCard.content.cloneNode(true);
+
+    const nameElement = cardElement.querySelector(".elements__card-name");
+    nameElement.textContent = cardData.name;
+
+    const imageElement = cardElement.querySelector(".elements__card-img");
+    imageElement.src = cardData.image;
+    imageElement.alt = cardData.name;
+
+    const cardList = document.querySelector(".elements__card");
+    cardList.append(cardElement);
+
+}
+
+const initialCards = [
+    {
+      name: "Vale de Yosemite",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+    },
+    {
+      name: "Lago Louise",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+    },
+    {
+      name: "Montanhas Carecas",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+    },
+    {
+      name: "Latemar",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+    },
+    {
+      name: "Parque Nacional da Vanoise ",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+    },
+    {
+      name: "Lago di Braies",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+    }
+];
+
+initialCards.forEach(addCard);
