@@ -41,8 +41,17 @@ closePopupButton.addEventListener("click", function() {
   popup.classList.remove("popup_opened")
 });
 
+function handleAddFormSubmit(evt) {
+  evt.preventDefault();
+  cardName.textContent = inputName.value;
+  cardImage.src = inputImage.value;
+  popup.classList.remove("popup_opened");
+}
+
 const formAdd = document.querySelector(".popup__form_add");
-formAdd.addEventListener("submit", (evt) => {
+formAdd.addEventListener("submit",  handleAddFormSubmit);
+
+ formAdd.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const nameInput = document.querySelector(".popup__form-input_name");
   const imageInput = document.querySelector(".popup__form-input_image");
