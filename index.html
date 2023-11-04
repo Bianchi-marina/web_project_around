@@ -27,10 +27,10 @@
             </button>        
         </section>
         <section class="elements">
-            <ul class="elements__card"></ul>
+            <ul class="elements__card">
             <template id="template-card">
                 <li class="elements__li">
-                    <button type="button" class="elements__trash"><img src="./images/trash-icon.png"></button>
+                    <button type="button" class="elements__trash"><img class="elements__button-trash"src="./images/trash-icon.png" alt=""></button>
                     <img  class="elements__card-img" src="" alt=""> 
                     <div class="elements__card-text">
                         <h2 class="elements__card-name"></h2>
@@ -39,7 +39,8 @@
                         </svg></button>
                     </div>
                 </li>
-            </template>    
+            </template>
+            </ul>  
         </section>
         <section class="popup">
             <div class="popup__container">
@@ -59,12 +60,20 @@
                 <button type="button" class="popup__close-icon">
                     <img class="popup__close-icon-img" src="./images/close-icon.png" alt="ìcone para fechar o pop-up">
                 </button>
-                <form class="popup__form">
+                <form class="popup__form popup__form_add">
                     <h2 class="popup __title">Novo Local</h2>
-                    <input class="popup__form-input popup__form-input_title" type="text">
+                    <input class="popup__form-input popup__form-input_name" type="text">
                     <input class="popup__form-input popup__form-input_image" type="image">
                     <button type="submit" class="popup__button-submit">Criar</button>
                 </form>
+            </div>
+        </section>
+        <section class="popup popup_image">
+            <div class="popup__container">
+                <button type="button" class="popup__close-icon">
+                    <img class="popup__close-icon-img" src="./images/close-icon.png" alt="ìcone para fechar o pop-up">
+                </button>
+                <input class="popup__form-input popup__form-input_image" type="image">
             </div>
         </section>
         <footer class="footer">
