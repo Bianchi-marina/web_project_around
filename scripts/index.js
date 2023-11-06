@@ -30,43 +30,19 @@ const addPopupButton = document.querySelector(".profile__add-button");
 const cardName = document.querySelector(".elements__card-name");
 const inputImage = document.querySelector(".popup__form-input_image");
 const cardImage = document.querySelector(".elements__card-img");
+const popupAdd = document.querySelector(".popup__add");
+const closePopupAddButton = document.querySelector(".popup_close");
+const formAdd = document.querySelector(".popup__form_add");
 
 addPopupButton.addEventListener("click", function () {
-  popup.classList.add("popup_opened");
+  popupAdd.classList.add("popup_opened");
   inputName.value = cardName.textContent;
   inputImage.value = cardImage.src;
 });
 
-closePopupButton.addEventListener("click", function() {
-  popup.classList.remove("popup_opened")
+closePopupAddButton.addEventListener("click", function() {
+  popupAdd.classList.remove("popup_opened");
 });
-
-function handleAddFormSubmit(evt) {
-  evt.preventDefault();
-  cardName.textContent = inputName.value;
-  cardImage.src = inputImage.value;
-  popup.classList.remove("popup_opened");
-}
-
-const formAdd = document.querySelector(".popup__form_add");
-formAdd.addEventListener("submit",  handleAddFormSubmit);
-
- formAdd.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const nameInput = document.querySelector(".popup__form-input_name");
-  const imageInput = document.querySelector(".popup__form-input_image");
-
-  const productData = {
-    name: nameInput.value,
-    image: imageInput.value,
-  };
-  addCard(cardData);
-  closePopupButton.addEventListener("click", function() {
-    popup.classList.remove("popup_opened")
-  });
-});
-
-const popupImage = document.querySelector(".popup_image");
 
 function addCard(cardData) {
   const templateCard = document.querySelector("#template-card");
@@ -76,18 +52,13 @@ function addCard(cardData) {
   nameElement.textContent = cardData.name;
 
   const imageElement = cardElement.querySelector(".elements__card-img");
-  imageElement.addEventListener("click", () => {
-    const popupImageElement = document.querySelector(".elements__card-img");
-    popupImageElement.src = cardData.image;
-    popupImageElement.alt = cardData.name;
-    openPopup(popupImage);
-  });
+  imageElement.textContent = cardData.src;
 
   imageElement.src = cardData.image;
   imageElement.alt = cardData.name;
 
   const cardList = document.querySelector(".elements__card");
-  cardList.prepend(cardElement);
+  cardList.prepend(cardElement); 
 }
 
 const initialCards = [
