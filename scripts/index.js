@@ -99,6 +99,7 @@ initialCards.forEach(addCard);
 
 const addPopupButton = document.querySelector(".profile__add-button");
 const cardName = document.querySelector(".elements__card-name");
+const inputTitle = document.querySelector(".popup__form-input_title");
 const cardImage = document.querySelector(".elements__card-img");
 const inputImage = document.querySelector(".popup__form-input_link");
 const popupAdd = document.querySelector(".popup__add");
@@ -106,7 +107,7 @@ const closePopupAddButton = document.querySelector(".popup_close");
 
 addPopupButton.addEventListener("click", () => {
   popupAdd.classList.add("popup_opened");
-  inputName.value = "";
+  inputTitle.value = "";
   inputImage.value = "";
 });
 
@@ -117,13 +118,33 @@ closePopupAddButton.addEventListener("click", function() {
 
 const formAdd = document.querySelector(".popup__form_add");
 
-formAdd.addEventListener("submit", (evt) => {
+
+// formAdd.addEventListener("submit", (evt) => {
+//   evt.preventDefault();
+//   const inputTitle = document.querySelector(".popup__form-input_title");
+//   const inputImage = document.querySelector(".popup__form-input_link");
+
+//   const cardData = {
+//     name: inputTitle.value,
+//     image: inputImage.value,
+//   };
+  
+//   addCard(cardData);
+//   popupAdd.classList.remove("popup_opened");
+// });
+
+function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const card = {
-    name: inputName.value,
+  const inputTitle = document.querySelector(".popup__form-input_title");
+  const inputImage = document.querySelector(".popup__form-input_link");
+
+  const cardData = {
+    name: inputTitle.value,
     image: inputImage.value,
   };
-
-  addCard(card);
+  
+  addCard(cardData);
   popupAdd.classList.remove("popup_opened");
-});
+} 
+
+formAdd.addEventListener("submit", handleCardFormSubmit);
