@@ -118,21 +118,6 @@ closePopupAddButton.addEventListener("click", function() {
 
 const formAdd = document.querySelector(".popup__form_add");
 
-
-// formAdd.addEventListener("submit", (evt) => {
-//   evt.preventDefault();
-//   const inputTitle = document.querySelector(".popup__form-input_title");
-//   const inputImage = document.querySelector(".popup__form-input_link");
-
-//   const cardData = {
-//     name: inputTitle.value,
-//     image: inputImage.value,
-//   };
-  
-//   addCard(cardData);
-//   popupAdd.classList.remove("popup_opened");
-// });
-
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const inputTitle = document.querySelector(".popup__form-input_title");
