@@ -16,7 +16,16 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.popup__img_zoom {
+    height: 70vh;
+}
+
+.popup__description {
+    color: white;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
 }
 
 .popup__close-icon {
