@@ -21,16 +21,23 @@ HTML: Responsible for the website's structure and content.
 CSS: Provides styling and layout for the website, including interactive features.
 JavaScript: Manages form handling, real-time updates, and user interactions.
 
-*How to Run the Project*
-To run the project, follow these steps:
-
-Clone this repository to your local machine.
-Open the project folder in your code editor.
-Launch the index.html file in your preferred web browser.
-Explore the responsive website with all its features and interactions.
-
 *Credits*
 This project is part of the Tripleten course, and credit goes to the course instructors and contributors for the guidance and support provided during its development.
 
-*GitHub Pages*
+## New Features
+
+### Popup for Creating Cards
+Now, users can create new cards through a convenient popup feature. Simply click on the designated button to open a popup form for adding new cards with ease.
+
+### Image Zoom Popup for Cards
+Enhancing visual elements, the project now includes a zoom feature for card images. Users can click on the image to view it in more detail via a popup window.
+
+### Like and Delete Buttons for Cards
+Each card now contains interactive buttons for liking and deleting. Users can express their preference by liking the cards and remove unwanted cards effortlessly.
+
+Feel free to explore these new features and provide any feedback or suggestions.
+Happy collaborating!
+
+
+
 
