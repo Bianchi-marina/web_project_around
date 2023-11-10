@@ -40,14 +40,14 @@ function addCard(cardData) {
   const popupImage = document.querySelector(".popup_image");
 
   imageElement.addEventListener("click", () => {
-    const popupZoom = document.querySelector(".popup__img_zoom");
+    const popupZoom = document.querySelector(".popup__img-zoom");
     popupZoom.src = cardData.image;
     const popupDescription = document.querySelector(".popup__description");
     popupDescription.textContent = cardData.name;
     popupImage.classList.add("popup_opened");
   });
   
-  const closeZoom = document.querySelector(".popup_close-zoom");
+  const closeZoom = document.querySelector(".popup__close-zoom");
   closeZoom.addEventListener("click", () => {
     popupImage.classList.remove("popup_opened");
   })
@@ -102,8 +102,8 @@ const cardName = document.querySelector(".elements__card-name");
 const inputTitle = document.querySelector(".popup__form-input_title");
 const cardImage = document.querySelector(".elements__card-img");
 const inputImage = document.querySelector(".popup__form-input_link");
-const popupAdd = document.querySelector(".popup__add");
-const closePopupAddButton = document.querySelector(".popup_close");
+const popupAdd = document.querySelector(".popup-add");
+const closePopupAddButton = document.querySelector(".popup__close");
 
 addPopupButton.addEventListener("click", () => {
   popupAdd.classList.add("popup_opened");
