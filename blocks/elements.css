@@ -51,23 +51,27 @@
 }
 .elements__like {
     margin: 0;
-    padding: 0;
-    border: 0;
-    background-color: white;
-    cursor: pointer;
-    transition: 0.2s;
 }
 
 
 .elements__button-like {
+    background-image: url(/images/heart-like.svg);
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    width: 21px; 
+    height: 19px;
+    fill: none;
     opacity: 100%;
+    cursor: pointer;
+    transition: 0.2s;
 }
 .elements__button-like:hover {
    opacity: 60%;
 }
 .elements__button-like_click {
     fill: black;
-    opacity: 100%;
     transition: 0.2s;
 }
 
