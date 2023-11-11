@@ -55,14 +55,13 @@
 
 
 .elements__button-like {
-    background-image: url(/images/heart-like.svg);
+    background-image: url(/images/heart-icon.png);
     border: 0;
     margin: 0;
     padding: 0;
     background-color: white;
-    width: 21px; 
+    width: 21px;
     height: 19px;
-    fill: none;
     opacity: 100%;
     cursor: pointer;
     transition: 0.2s;
@@ -71,8 +70,7 @@
    opacity: 60%;
 }
 .elements__button-like_click {
-    fill: black;
-    transition: 0.2s;
+    background-image: url(/images/heart-full-icon.png);
 }
 
 .elements__trash {
