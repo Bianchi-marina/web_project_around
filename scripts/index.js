@@ -6,6 +6,13 @@ const inputName = document.querySelector(".popup__form-input_name");
 const inputAbout = document.querySelector(".popup__form-input_about");
 const profileName = document.querySelector(".profile__name");
 const profileAbout = document.querySelector(".profile__job");
+const addPopupButton = document.querySelector(".profile__add-button");
+const cardName = document.querySelector(".elements__card-name");
+const inputTitle = document.querySelector(".popup__form-input_title");
+const cardImage = document.querySelector(".elements__card-img");
+const inputImage = document.querySelector(".popup__form-input_link");
+const popupAdd = document.querySelector(".popup-add");
+const closePopupAddButton = document.querySelector(".popup__close");
 
 editPopupButton.addEventListener("click", function () {
     popup.classList.add("popup_opened");
@@ -96,14 +103,6 @@ const initialCards = [
 ];
 
 initialCards.forEach(addCard);
-
-const addPopupButton = document.querySelector(".profile__add-button");
-const cardName = document.querySelector(".elements__card-name");
-const inputTitle = document.querySelector(".popup__form-input_title");
-const cardImage = document.querySelector(".elements__card-img");
-const inputImage = document.querySelector(".popup__form-input_link");
-const popupAdd = document.querySelector(".popup-add");
-const closePopupAddButton = document.querySelector(".popup__close");
 
 addPopupButton.addEventListener("click", () => {
   popupAdd.classList.add("popup_opened");

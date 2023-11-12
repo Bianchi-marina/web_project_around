@@ -18,8 +18,7 @@
     border-radius: 10px;
 }
 
-.popup__img_zoom {
-    height: 540px;
+.popup__img-zoom {
     width: 100%;
     object-fit: cover;
 }
