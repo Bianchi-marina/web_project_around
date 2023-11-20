@@ -152,9 +152,10 @@ window.addEventListener('keydown', function (event) {
 });
 
 //criar uma function to click outside and close all popups
-const outerPopup = document.querySelector(".page"); 
-outerPopup.addEventListener("click", function(evt) {
-  if (evt.target.contains("popup_opened")) {
-    evt.target.remove("popup_opened");
-  }  
-});
+
+// const outerPopup = document.querySelector(".page"); 
+// outerPopup.addEventListener("click", function(evt) {
+//   if (evt.target.contains("popup_opened")) {
+//     evt.target.remove("popup_opened");
+//   }  
+// });
