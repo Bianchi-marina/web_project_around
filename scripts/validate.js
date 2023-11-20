@@ -1,6 +1,6 @@
 const checkInputValidity = (input, formElement, config) => {
   const isInputValid = input.checkValidity();
-  const errorElement = formElement.querySelector(`.${input.id}-error`);
+  const errorElement = formElement.querySelectorAll(`.${input.id}-error`);
   if (!isInputValid) {
     input.classList.remove(config.inputErrorClass);
     errorElement.classList.remove(config.errorClass);
@@ -10,7 +10,6 @@ const checkInputValidity = (input, formElement, config) => {
     errorElement.classList.add(config.errorClass);
     errorElement.textContent = input.validationMessage;
   }
-
 }
 
 const checkFormValidity = (formElement, config) => {
@@ -43,6 +42,6 @@ enableValidation({
      inputSelector: ".popup__form-input",
      submitButtonSelector: ".popup__button-submit",
      inactiveButtonClass: "popup__button-submit_disabled",
-     inputErrorClass: "popup__form-error",
+     inputErrorClass: "popup__form-input_error",
      errorClass: "popup__error_visible",
 }); 

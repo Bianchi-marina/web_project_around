@@ -132,3 +132,29 @@ function handleCardFormSubmit(evt) {
 } 
 
 formAdd.addEventListener("submit", handleCardFormSubmit);
+
+//criar uma function to close all popups with Esc
+window.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    popup.classList.remove("popup_opened");
+}
+});
+window.addEventListener('keydown', function (event) {
+  const popupImage = document.querySelector(".popup_image");
+  if (event.key === 'Escape') {
+    popupImage.classList.remove("popup_opened");
+}
+});
+window.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    popupAdd.classList.remove("popup_opened");
+}
+});
+
+//criar uma function to click outside and close all popups
+const outerPopup = document.querySelector(".page"); 
+outerPopup.addEventListener("click", function(evt) {
+  if (evt.target.contains("popup_opened")) {
+    evt.target.remove("popup_opened");
+  }  
+});
