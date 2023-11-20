@@ -50,11 +50,11 @@
                 </button>
                 <form class="popup__form" novalidate>
                     <h2 class="popup__title">Editar perfil</h2>
-                    <input id="name-input" class="popup__form-input popup__form-input_name" placeholder="Nome" type="text" minlength="2" maxlength="40" required>
-                    <span class="popup__form-error"></span>
-                    <input id="about-input" class="popup__form-input popup__form-input_about" placeholder="Sobre" type="text" minlength="2" maxlength="200" required>
-                    <span class="popup__form-error"></span>
-                    <button type="submit" class="popup__button-submit">Salvar</button>
+                    <input class="popup__form-input popup__form-input_name" placeholder="Nome" type="text" minlength="2" maxlength="40" required>
+                    <p class="popup__form-error"></p>
+                    <input class="popup__form-input popup__form-input_about" placeholder="Sobre" type="text" minlength="2" maxlength="200" required>
+                    <p class="popup__form-error"></p>
+                    <button type="submit" class="popup__button-submit" disabled>Salvar</button>
                 </form>
             </div>
         </section>
@@ -65,11 +65,11 @@
                 </button>
                 <form class="popup__form popup__form_add" novalidate>
                     <h2 class="popup__title">Novo Local</h2>
-                    <input id="title-input" placeholder="Título" type="text" class="popup__form-input popup__form-input_title" name="name" minlength="2" maxlength="30" required>
-                    <span class="popup__form-error"></span>
-                    <input id="url-input" placeholder="Link da Imagem" type="url" class="popup__form-input popup__form-input_link" name="image">
-                    <span class="popup__form-error"></span>
-                    <button type="submit" class="popup__button-submit">Criar</button>
+                    <input placeholder="Título" type="text" class="popup__form-input popup__form-input_title" name="name" minlength="2" maxlength="30" required>
+                    <p class="popup__form-error"></p>
+                    <input placeholder="Link da Imagem" type="url" class="popup__form-input popup__form-input_link" name="image">
+                    <p class="popup__form-error"></p>
+                    <button type="submit" class="popup__button-submit" disabled>Criar</button>
                 </form>
             </div>
         </section>

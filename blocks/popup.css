@@ -67,15 +67,17 @@
     padding: 34px 36px 36px 34px;
     font-family: Inter;
     color: black;
+    gap: 20px;
 }
 .popup__title {
     margin: 0;
-    margin-bottom: 54px;
+    margin-bottom: 34px;
        font-size: 24px;
         font-weight: 900;
 }
 .popup__form-input{
-    padding: 10px;
+    padding: 10px 0;
+    padding-left: 3px;
     border: none;
     border-bottom: 1px solid #545454;
     font-size: 14px;
@@ -84,7 +86,6 @@
 
 .popup__form-input_name{
     margin: 0;
-    margin-bottom: 30px;
 
 }
 .popup__form-input_about {
@@ -92,7 +93,6 @@
 }
 .popup__form-input_title {
     margin: 0;
-    margin-bottom: 30px;
 }
 .popup__form-input_link {
     margin: 0;
@@ -123,13 +123,14 @@ border: 0;
     opacity: 80%;
 }
 .popup__form-error {
-     font-size: 12px;
-     font-family: Inter;
-     font-weight: 400;
-     display: none;
-}
-.popup__form-error_active {
+    margin: 0;
     color: #FF0000;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 400;
+    display: none;
+}
+.popup__form-error_visible {
     display: block;
 }
 
