@@ -13,6 +13,7 @@ const cardImage = document.querySelector(".elements__card-img");
 const inputImage = document.querySelector(".popup__form-input_link");
 const popupAdd = document.querySelector(".popup-add");
 const closePopupAddButton = document.querySelector(".popup__close");
+const popupImage = document.querySelector(".popup_image");
 
 editPopupButton.addEventListener("click", function () {
     popup.classList.add("popup_opened");
@@ -43,8 +44,6 @@ function addCard(cardData) {
   const imageElement = cardElement.querySelector(".elements__card-img");
   imageElement.src = cardData.image;
   imageElement.alt = cardData.name;
-
-  const popupImage = document.querySelector(".popup_image");
 
   imageElement.addEventListener("click", () => {
     const popupZoom = document.querySelector(".popup__img-zoom");
@@ -133,29 +132,19 @@ function handleCardFormSubmit(evt) {
 
 formAdd.addEventListener("submit", handleCardFormSubmit);
 
-//criar uma function to close all popups with Esc
-window.addEventListener('keydown', function (event) {
+const closePopups = (event) => {
   if (event.key === 'Escape') {
     popup.classList.remove("popup_opened");
-}
-});
-window.addEventListener('keydown', function (event) {
-  const popupImage = document.querySelector(".popup_image");
-  if (event.key === 'Escape') {
     popupImage.classList.remove("popup_opened");
-}
-});
-window.addEventListener('keydown', function (event) {
-  if (event.key === 'Escape') {
     popupAdd.classList.remove("popup_opened");
+  } 
+  event.target.removeEventListener('keydown', closePopups);
+
+  if (event.target) {
+    event.target.classList.remove("popup_opened");
+  }
+  event.target.removeEventListener('click', closePopups);
 }
-});
 
-//criar uma function to click outside and close all popups
-
-// const outerPopup = document.querySelector(".page"); 
-// outerPopup.addEventListener("click", function(evt) {
-//   if (evt.target.contains("popup_opened")) {
-//     evt.target.remove("popup_opened");
-//   }  
-// });
+document.addEventListener('keydown', closePopups);
+document.addEventListener('click', closePopups);

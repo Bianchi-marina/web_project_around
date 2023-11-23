@@ -1,6 +1,6 @@
-function checkInputValidity (input, config) {
+function checkInputValidity (input, formElement, config) {
   const isInputValid = input.checkValidity();
-  const errorElement = input.parentElement.querySelector(config.errorSelector);
+  const errorElement = formElement.querySelector(config.errorSelector);
   if (isInputValid) {
     input.classList.remove(config.inputErrorClass);
     errorElement.classList.remove(config.errorClass);
@@ -16,15 +16,15 @@ function checkFormValidity (formElement, config) {
   const submitElement = formElement.querySelector(config.submitButtonSelector);
   if (isFormValid) {
     submitElement.disabled = false;
-    submitElement.remove(config.inactiveButtonClass);
+    submitElement.classList.remove(config.inactiveButtonClass);
   } else {
     submitElement.disabled = true;
-    submitElement.add(config.inactiveButtonClass);
+    submitElement.classList.add(config.inactiveButtonClass);
   }
 }
 
 function enableValidation (config) {
-  const formElement = document.querySelector(config.formSelector);
+  const formElement = document.querySelectorAll(config.formSelector);
   const inputList = formElement.querySelectorAll(config.inputSelector);
 
   inputList.forEach((input) => {
@@ -35,12 +35,14 @@ function enableValidation (config) {
   });
 }
 
+enableValidation();
+
 enableValidation({
-     formSelector: ".popup__form",
-     inputSelector: ".popup__form-input",
-     submitButtonSelector: ".popup__button-submit",
-     inactiveButtonClass: "popup__button-submit_disabled",
-     inputErrorClass: "popup__form-input_error",
-     errorClass: "popup__form-error_visible",
-     errorSelector: ".popup__form-error",
+  formSelector: ".popup__form",
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: ".popup__button-submit",
+  inactiveButtonClass: "popup__button-submit_disabled",
+  inputErrorClass: "popup__form-input_error",
+  errorClass: "popup__form-error_visible",
+  errorSelector: ".popup__form-error",
 }); 
