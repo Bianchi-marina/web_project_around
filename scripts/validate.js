@@ -36,29 +36,26 @@ const toggleButtonState = (inputList, buttonElement) => {
 };
 
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".popup__form-input"));
-  const buttonElement = formElement.querySelector(".popup__button-submit");
-
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-    });
-  });
-};
-
-const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(".popup__form"));
+  const buttonElement = formElement.querySelector(".popup__button-submit");
+  
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });
+  });
 
-    const fieldsetList = Array.from(formElement.querySelectorAll(".popup__form-set"));
+  toggleButtonState(formList, buttonElement);
+};
 
-    fieldsetList.forEach((fieldset) => {
-      setEventListeners(fieldset);
+const enableValidation = () => {
+  const formElement = document.querySelector(".popup__form");
+  const inputList = formElement.querySelectorAll(".popup__form-input");
+
+  inputList.forEach((input) => {
+    input.addEventListener("inpur", (evt) => {
+      checkInputValidity(evt.target);
+      setEventListeners(formElement);
     });
   });
 };
