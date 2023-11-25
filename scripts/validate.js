@@ -7,7 +7,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  // inputElement.classList.add("text-color");
   inputElement.classList.remove("popup__input_type_error");
   errorElement.classList.remove("popup__error_visible");
   errorElement.textContent = "";
@@ -30,8 +29,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add("popup__button_disabled");
+    buttonElement.setAttribute("disabled", true);
   } else {
     buttonElement.classList.remove("popup__button_disabled");
+    buttonElement.removeAttribute("disabled");
   }
 };
 
