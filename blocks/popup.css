@@ -162,8 +162,11 @@
         font-size: 18px;
     }
     .popup__button-submit {
-        width: 65%;
+        width: 100%;
         font-size: 14px;
+    }
+    .popup__container-img{
+        top: 70%;
     }
     .popup__img_zoom {
         height: 299px;
@@ -172,7 +175,7 @@
         width: 238px;
     }
     .popup__form-input {
-        width: 65%;
+        width: 100%;
     }
 
 }
