@@ -34,75 +34,6 @@ function handleProfileFormSubmit(evt) {
   
 form.addEventListener("submit", handleProfileFormSubmit);
 
-function addCard(cardData) {
-  const templateCard = document.querySelector("#template-card");
-  const cardElement = templateCard.content.cloneNode(true);
-
-  const nameElement = cardElement.querySelector(".elements__card-name");
-  nameElement.textContent = cardData.name;
-  
-  const imageElement = cardElement.querySelector(".elements__card-img");
-  imageElement.src = cardData.image;
-  imageElement.alt = cardData.name;
-
-  imageElement.addEventListener("click", () => {
-    const popupZoom = document.querySelector(".popup__img-zoom");
-    popupZoom.src = cardData.image;
-    const popupDescription = document.querySelector(".popup__description");
-    popupDescription.textContent = cardData.name;
-    popupImage.classList.add("popup_opened");
-  });
-  
-  const closeZoom = document.querySelector(".popup__close-zoom");
-  closeZoom.addEventListener("click", () => {
-    popupImage.classList.remove("popup_opened");
-  })
-
-  const cardList = document.querySelector(".elements__card");
-  cardList.prepend(cardElement);
-
-  const trashButton = document.querySelector(".elements__button-trash");
-  trashButton.addEventListener("click", () => {
-    const removeElement = trashButton.closest(".elements__li");
-    removeElement.remove();
-  });
-
-  const likeButton = document.querySelector(".elements__button-like");
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("elements__button-like_click");
-  });
-}
-
-
-const initialCards = [
-    {
-      name: "Vale de Yosemite",
-      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-    },
-    {
-      name: "Lago Louise",
-      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-    },
-    {
-      name: "Montanhas Carecas",
-      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-    },
-    {
-      name: "Latemar",
-      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-    },
-    {
-      name: "Parque Nacional da Vanoise ",
-      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-    },
-    {
-      name: "Lago di Braies",
-      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-    }
-];
-
-initialCards.forEach(addCard);
-
 addPopupButton.addEventListener("click", () => {
   popupAdd.classList.add("popup_opened");
   inputTitle.value = "";
@@ -148,3 +79,53 @@ const closePopups = (event) => {
 
 document.addEventListener('keydown', closePopups);
 document.addEventListener('click', closePopups);
+
+
+const initialCards = [
+    {
+      name: "Vale de Yosemite",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+    },
+    {
+      name: "Lago Louise",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+    },
+    {
+      name: "Montanhas Carecas",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+    },
+    {
+      name: "Latemar",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+    },
+    {
+      name: "Parque Nacional da Vanoise ",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+    },
+    {
+      name: "Lago di Braies",
+      image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+    }
+];
+
+const popupElement = document.querySelector(".elements__card");
+const popupZoom = document.querySelector(".popup__img-zoom");
+
+function handleOpenPopup() {
+  popupImage.classList.add("popup_opened");
+  const imageElement = document.querySelector(".popup__img-zoom");
+  imageElement.src = this._image;
+  imageElement.alt = this._name;
+  const textElement = document.querySelector(".popup__description");
+  textElement.textContent = this._name;
+}
+
+function handleClosePopup() {
+  popupImage.classList.remove("popup_opened");
+}
+
+import Card from "./Card.js";
+
+//As classes Card e FormValidator devem ser exportadas de seus arquivos correspondentes,
+// e então você deve importá-las e implementá-las dentro do index.js.
+//Certifique-se de que os arquivos JS estejam conectados ao index.html como módulos.
