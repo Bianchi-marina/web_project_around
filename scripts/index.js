@@ -56,8 +56,8 @@ function handleCardFormSubmit(evt) {
     name: inputTitle.value,
     image: inputImage.value,
   };
-  
-  addCard(cardData);
+ 
+  new Card(cardData,  "#template-card");
   popupAdd.classList.remove("popup_opened");
 } 
 
@@ -79,7 +79,6 @@ const closePopups = (event) => {
 
 document.addEventListener('keydown', closePopups);
 document.addEventListener('click', closePopups);
-
 
 const initialCards = [
     {
@@ -124,7 +123,85 @@ function handleClosePopup() {
   popupImage.classList.remove("popup_opened");
 }
 
-import Card from "./Card.js";
+class Card {
+  constructor(cardData, cardTemplate) {
+    this._name = cardData.name;
+    this._image = cardData.image;
+    this._cardTemplate = cardTemplate;
+  }
+
+  _getTemplate() {
+    const cardElement = document
+    .querySelector("#template-card")
+    .content
+    .cloneNode(true);
+
+    return cardElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    
+
+    this._element.querySelector(".elements__card-img").src = this._image;
+    this._element.querySelector(".elements__card-name").textContent = this._name;
+    this._element.querySelector(".elements__card-img").alt = this._name;
+
+    this._setEventListeners();
+
+    return this._element;
+  }
+
+  _setEventListeners() {
+    this._element.addEventListener("click", () => {
+      this.handleOpenPopup();
+    });
+
+    closePopupButton.addEventListener("click", () => {
+      this.handleClosePopup();
+    });
+
+    const trashButton = this._element
+    .querySelector(".elements__button-trash");
+
+    trashButton.addEventListener("click", () => {
+    const removeElement = trashButton.closest(".elements__li");
+    removeElement.remove();
+    });
+
+    const likeButton = this._element
+    .querySelector(".elements__button-like");
+  
+    likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("elements__button-like_click");
+    });
+  }
+}
+
+initialCards.forEach((item) => {
+  const card = new Card (item, "#template-card");
+  const cardElement = card.generateCard();
+  popupElement.prepend(cardElement);
+});
+
+// const imageElement = cardElement.querySelector(".elements__card-img");
+// imageElement.src = cardData.image;
+// imageElement.alt = cardData.name;
+
+// imageElement.addEventListener("click", () => {
+//   const popupZoom = document.querySelector(".popup__img-zoom");
+//   popupZoom.src = cardData.image;
+//   const popupDescription = document.querySelector(".popup__description");
+//   popupDescription.textContent = cardData.name;
+//   popupImage.classList.add("popup_opened");
+// });
+
+// const closeZoom = document.querySelector(".popup__close-zoom");
+// closeZoom.addEventListener("click", () => {
+//   popupImage.classList.remove("popup_opened");
+// })
+
+
 
 //As classes Card e FormValidator devem ser exportadas de seus arquivos correspondentes,
 // e então você deve importá-las e implementá-las dentro do index.js.
