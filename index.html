@@ -1,103 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/index.css">
-  <title>EUA Afora</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <title>EUA Afora</title>
+  </head>
+  <body>
     <section class="page">
-        <header class="header">
-            <img class="header__logo" src="./images/logo-vector.png" alt="Logo da página Around us">
-        </header>
-        <section class="profile">
-            <div class="profile__view">
-                <img class="profile__img" src="./images/profile-img.jpg" alt="Foto de perfil do usuário">
-                <div class="profile__description">
-                    <h2 class="profile__name">Jacques Cousteau</h2>
-                    <h2 class="profile__job">Explorar</h2>
-                    <button type="button" class="profile__edit-button">
-                        <img class="profile__edit-button-img" src="./images/edit-button.png" alt="Botão de editar o texto do perfil do usuário">
-                    </button>
-                </div>
+      <header class="header">
+        <img
+          class="header__logo"
+          src="./images/logo-vector.png"
+          alt="Logo da página Around us"
+        />
+      </header>
+      <section class="profile">
+        <div class="profile__view">
+          <img
+            class="profile__img"
+            src="./images/profile-img.jpg"
+            alt="Foto de perfil do usuário"
+          />
+          <div class="profile__description">
+            <h2 class="profile__name">Jacques Cousteau</h2>
+            <h2 class="profile__job">Explorar</h2>
+            <button type="button" class="profile__edit-button">
+              <img
+                class="profile__edit-button-img"
+                src="./images/edit-button.png"
+                alt="Botão de editar o texto do perfil do usuário"
+              />
+            </button>
+          </div>
+        </div>
+        <button type="button" class="profile__add-button">
+          <img
+            class="profile__add-img"
+            src="./images/add-button.png"
+            alt="Botão para adicionar conteúdo a página"
+          />
+        </button>
+      </section>
+      <section class="elements">
+        <ul class="elements__card elements"></ul>
+        <template id="template-card">
+          <li class="elements__li">
+            <button type="button" class="elements__trash">
+              <img
+                class="elements__button-trash"
+                src="./images/trash.png"
+                alt="ícone de lixeira"
+              />
+            </button>
+            <img class="elements__card-img" src="#" alt="" />
+            <div class="elements__card-text">
+              <p class="elements__card-name"></p>
+              <div class="elements__like">
+                <button type="button" class="elements__button-like"></button>
+              </div>
             </div>
-            <button type="button" class="profile__add-button">
-                <img class="profile__add-img" src="./images/add-button.png" alt="Botão para adicionar conteúdo a página">
-            </button>        
-        </section>
-        <section class="elements">
-            <ul class="elements__card elements"></ul>
-            <template id="template-card">
-                <li class="elements__li">
-                    <button type="button" class="elements__trash">
-                        <img class="elements__button-trash" src="./images/trash.png"  alt="ícone de lixeira">
-                    </button>
-                    <img  class="elements__card-img" src="#" alt=""> 
-                    <div class="elements__card-text">
-                        <p class="elements__card-name"></p>
-                        <div class="elements__like">
-                            <button type="button" class="elements__button-like"></button>
-                        </div>
-                    </div>
-                </li>
-            </template>
-        </section>
-        <section class="popup">
-            <div class="popup__container">
-                <button type="button" class="popup__close-icon">
-                    <img class="popup__close-icon-img" src="./images/close-icon.png" alt="ìcone para fechar o pop-up">
-                </button>
-                <form class="popup__form" novalidate>
-                    <fieldset class="popup__set">
-                        <h2 class="popup__title">Editar perfil</h2>
-                        <label>
-                            <input id="name-input" class="popup__form-input popup__form-input_name" placeholder="Nome" type="text" minlength="2" maxlength="40" required>
-                            <span class="name-input-error"></span>
-                        </label>
-                        <label>
-                            <input id="about-input" class="popup__form-input popup__form-input_about" placeholder="Sobre" type="text" minlength="2" maxlength="200" required>
-                            <span class="about-input-error"></span>
-                        </label>
-                        <button type="submit" class="popup__button-submit">Salvar</button>
-                    </fieldset>
-                </form>
-            </div>
-        </section>
-        <section class="popup popup-add">
-            <div class="popup__container">
-                <button type="button" class="popup__close-icon">
-                    <img class="popup__close-icon-img popup__close" src="./images/close-icon.png" alt="ìcone para fechar o pop-up">
-                </button>
-                <form class="popup__form popup__form_add" novalidate>
-                    <fieldset class="popup__set">  
-                        <h2 class="popup__title">Novo Local</h2>
-                        <label>
-                            <input id="title-input" placeholder="Título" type="text" class="popup__form-input popup__form-input_title" name="name" minlength="2" maxlength="30" required>
-                            <span class="title-input-error"></span>
-                        </label>
-                        <label>
-                            <input id="url-input" placeholder="Link da Imagem" type="url" class="popup__form-input popup__form-input_link" name="image">
-                            <span class="url-input-error"></span>
-                        </label>
-                        <button type="submit" class="popup__button-submit">Criar</button>
-                    </fieldset>
-                </form>
-            </div>
-        </section>
-        <section class="popup popup_image">
-            <div class="popup__container-img">
-                <button type="button" class="popup__close-icon">
-                    <img class="popup__close-icon-img popup__close-zoom" src="./images/close-icon.png" alt="ìcone para fechar o pop-up">
-                </button>
-                <img class="popup__img-zoom" src="#" alt="">
-                <p class="popup__description"></p>
-            </div>
-        </section>
-        <footer class="footer">
-            <h2 class="footer__copyright">&copy; 2023 Around The U.S.</h2>
-        </footer>
+          </li>
+        </template>
+      </section>
+      <section class="popup">
+        <div class="popup__container">
+          <button type="button" class="popup__close-icon">
+            <img
+              class="popup__close-icon-img"
+              src="./images/close-icon.png"
+              alt="ìcone para fechar o pop-up"
+            />
+          </button>
+          <form class="popup__form" novalidate>
+            <fieldset class="popup__set">
+              <h2 class="popup__title">Editar perfil</h2>
+              <label>
+                <input
+                  id="name-input"
+                  class="popup__form-input popup__form-input_name"
+                  placeholder="Nome"
+                  type="text"
+                  minlength="2"
+                  maxlength="40"
+                  required
+                />
+                <span class="name-input-error"></span>
+              </label>
+              <label>
+                <input
+                  id="about-input"
+                  class="popup__form-input popup__form-input_about"
+                  placeholder="Sobre"
+                  type="text"
+                  minlength="2"
+                  maxlength="200"
+                  required
+                />
+                <span class="about-input-error"></span>
+              </label>
+              <button type="submit" class="popup__button-submit">Salvar</button>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+      <section class="popup popup-add">
+        <div class="popup__container"  id="cards-form">
+          <button type="button" class="popup__close-icon">
+            <img
+              class="popup__close-icon-img popup__close"
+              src="./images/close-icon.png"
+              alt="ìcone para fechar o pop-up"
+            />
+          </button>
+          <form class="popup__form popup__form_add" novalidate>
+            <fieldset class="popup__set">
+              <h2 class="popup__title">Novo Local</h2>
+              <label>
+                <input
+                  id="title-input"
+                  placeholder="Título"
+                  type="text"
+                  class="popup__form-input popup__form-input_title"
+                  name="name"
+                  minlength="2"
+                  maxlength="30"
+                  required
+                />
+                <span class="title-input-error"></span>
+              </label>
+              <label>
+                <input
+                  id="url-input"
+                  placeholder="Link da Imagem"
+                  type="url"
+                  class="popup__form-input popup__form-input_link"
+                  name="image"
+                />
+                <span class="url-input-error"></span>
+              </label>
+              <button type="submit" class="popup__button-submit">Criar</button>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+      <section class="popup popup_image">
+        <div class="popup__container-img">
+          <button type="button" class="popup__close-icon">
+            <img
+              class="popup__close-icon-img popup__close-zoom"
+              src="./images/close-icon.png"
+              alt="ìcone para fechar o pop-up"
+            />
+          </button>
+          <img class="popup__img-zoom" src="#" alt="" />
+          <p class="popup__description"></p>
+        </div>
+      </section>
+      <footer class="footer">
+        <h2 class="footer__copyright">&copy; 2023 Around The U.S.</h2>
+      </footer>
     </section>
-    <script src="./scripts/index.js" type="text/javascript"></script>
-</body>
+    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/utils.js"></script>
+  </body>
 </html>

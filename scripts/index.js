@@ -1,57 +1,76 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import * as utils from './utils.js';
+import Card from "./Card.js";
+import  FormValidator  from "./FormValidator.js";
 
-const cardTemplateSelector = '#template-card';
+const forms = document.querySelector(".popup__form");
 
-const cardData = [
+const initialCards = [
   {
-    name: 'Vale de Yosemite',
-    image: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg',
+    name: "Vale de Yosemite",
+    image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
   },
   {
-    name: 'Lago Louise',
-    image: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg',
+    name: "Lago Louise",
+    image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
   },
   {
-    name: 'Montanhas Carecas',
-    image: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg',
+    name: "Montanhas Carecas",
+    image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
   },
   {
-    name: 'Latemar',
-    image: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg',
+    name: "Latemar",
+    image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
   },
   {
-    name: 'Parque Nacional da Vanoise',
-    image: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg',
+    name: "Parque Nacional da Vanoise",
+    image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
   },
   {
-    name: 'Lago di Braies',
-    image: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg',
+    name: "Lago di Braies",
+    image: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
   }
 ];
 
-cardData.forEach((item) => {
-  const card = new Card(item, cardTemplateSelector);
-  const cardElement = card.generateCard();
-  document.querySelector('.elements__card').append(cardElement);
+function addCard(card) {
+  const cardInstance = new Card(card, "#template-card");
+  const cardsContainer = document.querySelector(".elements__card");
+
+  cardsContainer.prepend(cardInstance.generateCard());
+
+  return cardInstance;
+}
+
+initialCards.forEach((card) => {
+  addCard(card);
 });
 
-const formValidatorConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-input',
-  submitButtonSelector: '.popup__button-submit',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+function handleCardFormSubmit(evt) {
+  evt.preventDefault();
+  const inputTitle = document.querySelector(".popup__form-input_title");
+  const inputImage = document.querySelector(".popup__form-input_link");
+  const popupAdd = document.querySelector(".popup__form_add");
+  const card = {
+    name: inputTitle.value,
+    link: inputImage.value,
+  };
+  addCard(card);
+  popupAdd.classList.remove("popup_opened");
+  document.querySelector(".popup__form_add").reset();
+}
+forms.addEventListener("submit", handleCardFormSubmit);
 
-const formElement = document.querySelector('.popup__form');
-const formValidator = new FormValidator(formValidatorConfig, formElement);
-formValidator.enableValidation();
+const formList = Array.from(document.querySelectorAll(".popup__form"));
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator(
+    {
+      formSelector: ".popup__form",
+      inputSelector: ".popup__form-input",
+      submitButtonSelector: ".popup__button-submit",
+      inactiveButtonClass: "popup__button_disabled",
+      inputErrorClass: "popup__input_type_error",
+      errorClass: "popup__error_visible",
+    },
+    formElement
+  );
 
-const modalElements = document.querySelectorAll('.popup, .popup-add, .popup_image');
-modalElements.forEach((modal) => {
-  utils.addEscCloseListener(modal);
-  utils.addButtonCloseListener(modal, '.popup__close');
+  formValidator.enableValidation();
 });
