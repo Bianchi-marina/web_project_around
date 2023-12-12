@@ -44,21 +44,6 @@ closePopupAddButton.addEventListener("click", () => {
   popupAdd.classList.remove("popup_opened");
 });
 
-cardImage.addEventListener("click", (cardData) => {
-  popupImage.classList.add("popup_opened");
-  const popupZoom = document.querySelector(".popup__img-zoom");
-  popupZoom.src = cardData.image;
-  const imageElement = popupImg.querySelector(".elements__card-img");
-  imageElement.src = cardData.image;
-  imageElement.alt = cardData.name;
-  const textElement = popupImg.querySelector(".popup__description");
-  textElement.textContent = cardData.name;
-});
-
-closeImage.addEventListener("click", () => {
-  popupImage.classList.remove("popup_opened");
-});
-
 
 document.addEventListener("keydown", function escapePopup(evt) {
   if (evt.key === "Escape") {
@@ -75,5 +60,30 @@ function onClick(evt) {
 popup.addEventListener("click", onClick);
 popupImage.addEventListener("click", onClick);
 popupAdd.addEventListener("click", onClick);
+
+
+function openPopupImage(image, name) {
+  const popupImage = document.querySelector("popup_image");
+  popupImage.classList.add("popup_opened");
+  const imageElement = popupImage.querySelector(".popup__img-zoom");
+  const textElement = popupImage.querySelector(".popup__description");
+
+  imageElement.src = image;
+  imageElement.alt = name;
+  textElement.textContent = name;
+}
+
+function closePopupImage() {
+  const popupImage = document.querySelector(".popup_image");
+  popupImage.classList.remove("popup_opened");
+}
+
+cardImage.addEventListener("click", () =>{
+  openPopupImage();
+});
+
+closeImage.addEventListener("click", () => {
+  closePopupImage();
+});
 
 

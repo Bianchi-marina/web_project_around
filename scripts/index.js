@@ -32,12 +32,12 @@ const initialCards = [
 ];
 
 function addCard(card) {
-  const cardInstance = new Card(card, "#template-card");
-  const cardsContainer = document.querySelector(".elements__card");
+  const newCard = new Card(card, "#template-card");
+  const elementCard = document.querySelector(".elements__card");
 
-  cardsContainer.prepend(cardInstance.generateCard());
+  elementCard.prepend(newCard.generateCard());
 
-  return cardInstance;
+  return elementCard;
 }
 
 initialCards.forEach((card) => {
@@ -59,19 +59,20 @@ function handleCardFormSubmit(evt) {
 
 popupFormAdd.addEventListener("submit", handleCardFormSubmit);
 
-const formList = Array.from(document.querySelectorAll(".popup__form"));
-formList.forEach((formElement) => {
-  const formValidator = new FormValidator(
-    {
-      formSelector: ".popup__form",
-      inputSelector: ".popup__form-input",
-      submitButtonSelector: ".popup__button-submit",
-      inactiveButtonClass: "popup__button_disabled",
-      inputErrorClass: "popup__input_type_error",
-      errorClass: "popup__error_visible",
-    },
-    formElement
-  );
+const formConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: ".popup__button-submit",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
 
-  formValidator.enableValidation();
-});
+const formProfile = document.querySelector(".popup__form");
+const formValidatorProfile = new FormValidator(formConfig, formProfile);
+formValidatorProfile.enableValidation();
+
+const formAdd = document.querySelector(".popup__form_add");
+const formValidatorAdd = new FormValidator(formConfig, formAdd);
+formValidatorAdd.enableValidation();
+
