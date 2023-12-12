@@ -63,7 +63,7 @@ popupAdd.addEventListener("click", onClick);
 
 
 function openPopupImage(image, name) {
-  const popupImage = document.querySelector("popup_image");
+  const popupImage = document.querySelector(".popup_image");
   popupImage.classList.add("popup_opened");
   const imageElement = popupImage.querySelector(".popup__img-zoom");
   const textElement = popupImage.querySelector(".popup__description");
