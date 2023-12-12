@@ -1,7 +1,8 @@
 import Card from "./Card.js";
 import  FormValidator  from "./FormValidator.js";
 
-const forms = document.querySelector(".popup__form");
+const popupFormAdd = document.querySelector(".popup__form_add");
+
 
 const initialCards = [
   {
@@ -45,18 +46,18 @@ initialCards.forEach((card) => {
 
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
+  const popupAdd = document.querySelector(".popup-add");
   const inputTitle = document.querySelector(".popup__form-input_title");
   const inputImage = document.querySelector(".popup__form-input_link");
-  const popupAdd = document.querySelector(".popup__form_add");
   const card = {
     name: inputTitle.value,
-    link: inputImage.value,
+    image: inputImage.value,
   };
   addCard(card);
   popupAdd.classList.remove("popup_opened");
-  document.querySelector(".popup__form_add").reset();
 }
-forms.addEventListener("submit", handleCardFormSubmit);
+
+popupFormAdd.addEventListener("submit", handleCardFormSubmit);
 
 const formList = Array.from(document.querySelectorAll(".popup__form"));
 formList.forEach((formElement) => {

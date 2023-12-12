@@ -15,6 +15,7 @@ const popupAdd = document.querySelector(".popup-add");
 const closePopupAddButton = document.querySelector(".popup__close");
 const popupImage = document.querySelector(".popup_image");
 const closeImage = popupImage.querySelector(".popup__close-zoom");
+const popupFormAdd = document.querySelector(".popup__form_add");
 
 editPopupButton.addEventListener("click", function () {
   popup.classList.add("popup_opened");
@@ -43,9 +44,21 @@ closePopupAddButton.addEventListener("click", () => {
   popupAdd.classList.remove("popup_opened");
 });
 
+cardImage.addEventListener("click", (cardData) => {
+  popupImage.classList.add("popup_opened");
+  const popupZoom = document.querySelector(".popup__img-zoom");
+  popupZoom.src = cardData.image;
+  const imageElement = popupImg.querySelector(".elements__card-img");
+  imageElement.src = cardData.image;
+  imageElement.alt = cardData.name;
+  const textElement = popupImg.querySelector(".popup__description");
+  textElement.textContent = cardData.name;
+});
+
 closeImage.addEventListener("click", () => {
   popupImage.classList.remove("popup_opened");
 });
+
 
 document.addEventListener("keydown", function escapePopup(evt) {
   if (evt.key === "Escape") {
@@ -62,3 +75,5 @@ function onClick(evt) {
 popup.addEventListener("click", onClick);
 popupImage.addEventListener("click", onClick);
 popupAdd.addEventListener("click", onClick);
+
+
