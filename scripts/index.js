@@ -2,6 +2,7 @@ import Card from "./Card.js";
 import  FormValidator  from "./FormValidator.js";
 
 const popupFormAdd = document.querySelector(".popup__form_add");
+const popupImage = document.querySelector(".popup_image");
 
 
 const initialCards = [
@@ -37,6 +38,23 @@ function addCard(card) {
 
   elementCard.prepend(newCard.generateCard());
 
+  const imageElement = elementCard.querySelector(".elements__card-img");
+  imageElement.src = card.image;
+  imageElement.alt = card.name;
+
+  imageElement.addEventListener("click", () => {
+    const popupZoom = document.querySelector(".popup__img-zoom");
+    popupZoom.src = card.image;
+    const popupDescription = document.querySelector(".popup__description");
+    popupDescription.textContent = card.name;
+    popupImage.classList.add("popup_opened");
+  });
+
+  const closeZoom = document.querySelector(".popup__close-zoom");
+  closeZoom.addEventListener("click", () => {
+    popupImage.classList.remove("popup_opened");
+  })
+
   return elementCard;
 }
 
@@ -58,6 +76,7 @@ function handleCardFormSubmit(evt) {
 }
 
 popupFormAdd.addEventListener("submit", handleCardFormSubmit);
+
 
 const formConfig = {
   formSelector: ".popup__form",
