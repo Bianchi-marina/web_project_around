@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(dataCard,  templateSelector) {
+  constructor(dataCard,  templateSelector, popupWithImage) {
     this._image = dataCard.image;
     this._name = dataCard.name;
     this._templateSelector = templateSelector;
-
+    this._popupWithImage = popupWithImage;
   }
 
   _getTemplate() {
@@ -46,5 +46,12 @@ export default class Card {
   _setEventListeners() {
     this._like();
     this._trash();
+    this._element.querySelector(".elements__card-img").addEventListener("click", () => {
+      this._handleImageClick();
+    });
+  }
+
+  _handleImageClick() {
+    this._popupWithImage.open(this._image, this._name);
   }
 }
