@@ -15,6 +15,10 @@ export const inputName = document.querySelector(".popup__form-input_name");
 export const inputAbout = document.querySelector(".popup__form-input_about");
 export const openAddButton = document.querySelector(".profile__add-button");
 export const cardElements = document.querySelector(".elements__card");
+export const selectors = {
+  nameSelector: ".profile__name",
+  aboutSelector: ".profile__job",
+}
 export const initialCards = [
   {
     name: "Vale de Yosemite",

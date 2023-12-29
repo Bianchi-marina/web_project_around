@@ -12,13 +12,14 @@ import {
   inputName,
   inputAbout,
   openAddButton,
-  cardElements,
+  selectors,
 } from "./utils.js";
 
 const popupSelector = ".popup_image";
 const imageElement = document.querySelector(".popup__img-zoom");
 const captionElement = document.querySelector(".popup__description");
 const popupWithImage = new PopupWithImage(popupSelector, imageElement, captionElement, () => handleImageClick());
+popupWithImage.setEventListeners();
 
 
 const cardSection = new Section({
@@ -33,11 +34,8 @@ const cardSection = new Section({
 );
 cardSection.render();
 
-const userInfo = new UserInfo({
-  name: ".profile__name",
-  about: ".profile__job",
-});
-console.log(userInfo);
+const userInfo = new UserInfo(selectors);
+
 const popupProfile = new PopupWithForm({
   popupSelector: ".popup",
   submitCallback: ({ name , about }) =>
