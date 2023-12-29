@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/index.css" />
     <title>EUA Afora</title>
   </head>
   <body>
@@ -11,7 +10,7 @@
       <header class="header">
         <img
           class="header__logo"
-          src="./images/logo-vector.png"
+          src="<%=require('./images/logo-vector.png')%>"
           alt="Logo da página Around us"
         />
       </header>
@@ -19,7 +18,7 @@
         <div class="profile__view">
           <img
             class="profile__img"
-            src="./images/profile-img.jpg"
+            src="<%=require('./images/profile-img.jpg')%>"
             alt="Foto de perfil do usuário"
           />
           <div class="profile__description">
@@ -28,7 +27,7 @@
             <button type="button" class="profile__edit-button">
               <img
                 class="profile__edit-button-img"
-                src="./images/edit-button.png"
+                src="<%=require('./images/edit-button.png')%>"
                 alt="Botão de editar o texto do perfil do usuário"
               />
             </button>
@@ -37,7 +36,7 @@
         <button type="button" class="profile__add-button">
           <img
             class="profile__add-img"
-            src="./images/add-button.png"
+            src="<%=require('./images/add-button.png')%>"
             alt="Botão para adicionar conteúdo a página"
           />
         </button>
@@ -49,7 +48,7 @@
             <button type="button" class="elements__trash">
               <img
                 class="elements__button-trash"
-                src="./images/trash.png"
+                src="<%=require('./images/trash.png')%>"
                 alt="ícone de lixeira"
               />
             </button>
@@ -68,7 +67,7 @@
           <button type="button" class="popup__close-icon">
             <img
               class="popup__close-icon-img"
-              src="./images/close-icon.png"
+              src="<%=require('./images/close-icon.png')%>"
               alt="ìcone para fechar o pop-up"
             />
           </button>
@@ -111,7 +110,7 @@
           <button type="button" class="popup__close-icon">
             <img
               class="popup__close-icon-img popup__close"
-              src="./images/close-icon.png"
+              src="<%=require('./images/close-icon.png')%>"
               alt="ìcone para fechar o pop-up"
             />
           </button>
@@ -151,7 +150,7 @@
           <button type="button" class="popup__close-icon">
             <img
               class="popup__close-icon-img popup__close-zoom"
-              src="./images/close-icon.png"
+              src="<%=require('./images/close-icon.png')%>"
               alt="ìcone para fechar o pop-up"
             />
           </button>
@@ -163,7 +162,5 @@
         <h2 class="footer__copyright">&copy; 2023 Around The U.S.</h2>
       </footer>
     </section>
-    <script type="module" src="./scripts/index.js"></script>
-    <script type="module" src="./scripts/utils.js"></script>
   </body>
 </html>
