@@ -24,14 +24,12 @@ const popupWithImage = new PopupWithImage(popupSelector, imageElement, captionEl
 const cardSection = new Section({
       items: initialCards,
       renderer: (item) => {
-        const newCard = new Card(item, "#template-card", () => {
-        popupWithImage.open(item.image, item.name);
-      });
+        const newCard = new Card(item, "#template-card", popupWithImage);
       const cardElement = newCard.generateCard(); 
       cardSection.addItem(cardElement); 
     },
   },
-  cardElements
+  ".elements__card"
 );
 cardSection.render();
 
@@ -39,7 +37,7 @@ const userInfo = new UserInfo({
   name: ".profile__name",
   about: ".profile__job",
 });
-
+console.log(userInfo);
 const popupProfile = new PopupWithForm({
   popupSelector: ".popup",
   submitCallback: ({ name , about }) =>
@@ -63,9 +61,7 @@ const popupAddForm = new PopupWithForm({
       name: document.querySelector(".popup__form-input_title").value,
       image: document.querySelector(".popup__form-input_link").value,
     };
-    const newCard = new Card(dataCard, "#template-card", () => {
-      popupWithImage.open(dataCard.image, dataCard.name);
-    });
+    const newCard = new Card(dataCard, "#template-card", popupWithImage);
     const cardElement = newCard.generateCard();
     document.querySelector(".elements__card").prepend(cardElement);
   },
