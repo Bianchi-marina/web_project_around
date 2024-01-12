@@ -1,19 +1,46 @@
-fetch("https://around.nomoreparties.co/v1/web_ptbr_08", {
-  headers: {
-    authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5"
+export default class Api {
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
   }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
 
-fetch("https://around.nomoreparties.co/v1/web_ptbr_08/users/me", {
-    headers: {
-      authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5"
-    }
-  })
-    .then(res => res.json())
-    .then((result) => {
-      console.log(result);
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
+  }
+
+  addCard({ name, link }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ name, link }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      });
+  }
+
+  // updateLikes(cardId, likes) {
+  //   return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+  //     method: 'PUT',
+  //     headers: this._headers,
+  //     body: JSON.stringify({ likes }),
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //       return Promise.reject(`Error: ${res.status}`);
+  //     });
+  // }
+}

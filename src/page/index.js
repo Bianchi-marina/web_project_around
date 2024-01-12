@@ -4,7 +4,6 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForms.js";  
 import Section from "../components/Section.js";
-import { initialCards } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import {
   formAdd,
@@ -15,6 +14,15 @@ import {
   openAddButton,
   selectors,
 } from "../components/utils.js";
+import Api from "../components/API.js";
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_08",
+  headers: {
+    authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
+    "Content-Type": "application/json",
+  }
+});
 
 const popupSelector = ".popup_image";
 const imageElement = document.querySelector(".popup__img-zoom");
@@ -22,18 +30,35 @@ const captionElement = document.querySelector(".popup__description");
 const popupWithImage = new PopupWithImage(popupSelector, imageElement, captionElement, () => handleImageClick());
 popupWithImage.setEventListeners();
 
+api.getInitialCards()
+  .then((initialCards) => {
+        const cardSection = new Section({
+          items: initialCards,
+          renderer: (item) => {
+            const newCard = new Card(item, "#template-card", popupWithImage);
+          const cardElement = newCard.generateCard(); 
+          cardSection.addItem(cardElement);
+        },
+      },
+      ".elements__card"
+    );
+    cardSection.render();
+  })
+  .catch((err) => {
+    console.log(err); 
+  });
 
-const cardSection = new Section({
-      items: initialCards,
-      renderer: (item) => {
-        const newCard = new Card(item, "#template-card", popupWithImage);
-      const cardElement = newCard.generateCard(); 
-      cardSection.addItem(cardElement); 
-    },
-  },
-  ".elements__card"
-);
-cardSection.render();
+api.addCard({
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+})
+  .then((newCard) => {
+    console.log("Novo cartão adicionado:", newCard);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 
 const userInfo = new UserInfo(selectors);
 
