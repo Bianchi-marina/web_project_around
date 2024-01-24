@@ -51,8 +51,17 @@
 }
 .elements__like {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
-
+.elements__like-count {
+    color: black;
+    font-size: 13px;
+    font-family: Inter;
+    font-weight: 400;
+}
 
 .elements__button-like {
     background-image: url(../images/heart-icon.png);
