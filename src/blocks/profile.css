@@ -14,8 +14,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative; 
 }
-
+.profile__avatar {
+    position: relative;
+}
 .profile__img {
     width: 128px;
     height: 128px;
@@ -24,6 +27,31 @@
     margin: 0;
     object-fit: cover;
 }
+
+.profile__edit-avatar {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 24px;
+    height: 24px;
+    transform: translate(50%, -50%);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.profile__edit-avatar-img {
+    margin: 0;
+    object-fit: cover;
+}
+  
+.profile__img:hover .profile__edit-avatar {
+    opacity: 1;
+    transition: 0.2s;
+}
+
 .profile__description{
     margin: 0;
     margin-left: 20px;

@@ -4,7 +4,6 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForms.js";  
 import Section from "../components/Section.js";
-import { initialCards } from "../components/utils.js";
 import UserInfo from "../components/UserInfo.js";
 import {
   formAdd,
@@ -15,6 +14,16 @@ import {
   openAddButton,
   selectors,
 } from "../components/utils.js";
+import Api from "../components/Api.js";
+
+//>>>>>>>>> instancia api >>>>>>>>>>>>
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_08",
+  headers: {
+    authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
+    "Content-Type": "application/json"
+  }
+});
 
 const popupSelector = ".popup_image";
 const imageElement = document.querySelector(".popup__img-zoom");
@@ -22,26 +31,51 @@ const captionElement = document.querySelector(".popup__description");
 const popupWithImage = new PopupWithImage(popupSelector, imageElement, captionElement, () => handleImageClick());
 popupWithImage.setEventListeners();
 
-
+//>>>>>>>>>>> infos cards iniciais >>>>>>>>>>
 const cardSection = new Section({
-      items: initialCards,
-      renderer: (item) => {
-        const newCard = new Card(item, "#template-card", popupWithImage);
-      const cardElement = newCard.generateCard(); 
-      cardSection.addItem(cardElement); 
-    },
+  renderer: () => {
+    api.getInitialCards()
+      .then((result) => {
+        const initialCardsFromServer = result;
+        cardSection.render(initialCardsFromServer.map(cardData => {
+          const newCard = new Card(cardData, "#template-card", popupWithImage);
+          // newCard.setCardId(result._id); //>>>>>>>>>> ID do cartão criado
+          // newCard._updateLikeStatus(); //>>>>>>>>>>estado de like inicial
+          return newCard.generateCard();
+        }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
-  ".elements__card"
-);
-cardSection.render();
+}, ".elements__card");
 
-const userInfo = new UserInfo(selectors);
+//>>>>>>>>>>> infos user me >>>>>>>>>>>>>>>>>>>
+  const userInfo = new UserInfo(selectors);
 
+  api.getUserInformation()
+    .then((result) => {
+      const userInformationFromServer = result;
+  
+      userInfo.setUserInfo(userInformationFromServer.name, userInformationFromServer.about);
+    })
+    .catch((err) => {
+      console.log(err); 
+    });
+
+//>>>>>>>>>>> edit profile name e about - colocar na formprofile >>>>>>>>>>>>>>>
 const popupProfile = new PopupWithForm({
   popupSelector: ".popup",
   submitCallback: ({ name , about }) =>
-  {
-    userInfo.setUserInfo(name, about);
+  { 
+    api.editProfile({ name, about })
+      .then((result) => {
+        console.log(result);
+        userInfo.setUserInfo(name, about);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 });
 popupProfile.setEventListeners();
@@ -53,22 +87,57 @@ openFormButton.addEventListener("click", () => {
   popupProfile.open();
 });
 
+//>>>>>>>. create a new card = form Add >>>>>>>>>>>>>>>>>>>>>>>>>
 const popupAddForm = new PopupWithForm({
   popupSelector: ".popup-add",
   submitCallback: () => {
-    const dataCard = {
+    api.createNewCard({
       name: document.querySelector(".popup__form-input_title").value,
-      image: document.querySelector(".popup__form-input_link").value,
-    };
-    const newCard = new Card(dataCard, "#template-card", popupWithImage);
-    const cardElement = newCard.generateCard();
-    document.querySelector(".elements__card").prepend(cardElement);
+      link: document.querySelector(".popup__form-input_link").value,
+    })
+      .then((result) => {
+        console.log(result);
+
+        const newCard = new Card(result, "#template-card", popupWithImage);
+        // newCard.setCardId(result._id); //>>>>>>>>>> ID do cartão criado
+        // newCard._updateLikeStatus(); //>>>>>>>>>>estado de like inicial
+
+        const cardElement = newCard.generateCard();
+        document.querySelector(".elements__card").prepend(cardElement);
+
+        popupAddForm.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 });
 popupAddForm.setEventListeners();
 openAddButton.addEventListener("click", () => {
   popupAddForm.open();
 });
+
+// >>>>>>>>>>>criar logica do popup EDIT AVATAR PROFILE>>>>>>>>>>>>>>>>>>
+const editAvatar = new PopupWithForm({
+  popupSelector: ".popup-edit",
+  submitCallback: () => {
+    api.editAvatar({
+      avatarUrl: document.querySelector(".profile__edit-avatar-img").value,
+    })
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },
+});
+editAvatar.setEventListeners();
+const openEditAvatarPopup = document.querySelector(".profile__edit-avatar-img");
+openEditAvatarPopup.addEventListener("click", () => {
+editAvatar.open();
+});
+
 
 const formConfig = {
   formSelector: ".popup__form_add",
@@ -84,3 +153,4 @@ formValidatorAdd.enableValidation();
 
 const formValidatorProfile = new FormValidator(formConfig, formProfileElement); 
 formValidatorProfile.enableValidation();
+
