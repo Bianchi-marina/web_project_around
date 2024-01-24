@@ -31,24 +31,21 @@ const captionElement = document.querySelector(".popup__description");
 const popupWithImage = new PopupWithImage(popupSelector, imageElement, captionElement, () => handleImageClick());
 popupWithImage.setEventListeners();
 
-//>>>>>>>>>>> infos cards iniciais >>>>>>>>>>
+///>>>>>>>>>>>criarção da section com initial cards>>>>>>>>>>>>>>>
 const cardSection = new Section({
-  renderer: () => {
-    api.getInitialCards()
-      .then((result) => {
-        const initialCardsFromServer = result;
-        cardSection.render(initialCardsFromServer.map(cardData => {
-          const newCard = new Card(cardData, "#template-card", popupWithImage);
-          // newCard.setCardId(result._id); //>>>>>>>>>> ID do cartão criado
-          // newCard._updateLikeStatus(); //>>>>>>>>>>estado de like inicial
-          return newCard.generateCard();
-        }));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  renderer: (cardData) => {
+    const newCard = new Card(cardData, "#template-card", popupWithImage);
+    cardSection.addItem(newCard.generateCard());
   },
 }, ".elements__card");
+
+api.getInitialCards()
+  .then((result) => {
+    cardSection.render(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //>>>>>>>>>>> infos user me >>>>>>>>>>>>>>>>>>>
   const userInfo = new UserInfo(selectors);
@@ -87,56 +84,54 @@ openFormButton.addEventListener("click", () => {
   popupProfile.open();
 });
 
-//>>>>>>>. create a new card = form Add >>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>New card>>>>>>>>>>>>>>>>>.......
 const popupAddForm = new PopupWithForm({
   popupSelector: ".popup-add",
   submitCallback: () => {
-    api.createNewCard({
+    const cardData = {
       name: document.querySelector(".popup__form-input_title").value,
       link: document.querySelector(".popup__form-input_link").value,
+    };
+
+    api.createNewCard(cardData)
+    .then(() => {
+      return api.getInitialCards();
     })
-      .then((result) => {
-        console.log(result);
-
-        const newCard = new Card(result, "#template-card", popupWithImage);
-        // newCard.setCardId(result._id); //>>>>>>>>>> ID do cartão criado
-        // newCard._updateLikeStatus(); //>>>>>>>>>>estado de like inicial
-
-        const cardElement = newCard.generateCard();
-        document.querySelector(".elements__card").prepend(cardElement);
-
-        popupAddForm.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-});
-popupAddForm.setEventListeners();
-openAddButton.addEventListener("click", () => {
-  popupAddForm.open();
-});
-
-// >>>>>>>>>>>criar logica do popup EDIT AVATAR PROFILE>>>>>>>>>>>>>>>>>>
-const editAvatar = new PopupWithForm({
-  popupSelector: ".popup-edit",
-  submitCallback: () => {
-    api.editAvatar({
-      avatarUrl: document.querySelector(".profile__edit-avatar-img").value,
-    })
-    .then((result) => {
-      console.log(result);
+    .then((updatedData) => {
+      cardSection.render(updatedData);
     })
     .catch((err) => {
       console.log(err);
     });
   },
 });
-editAvatar.setEventListeners();
-const openEditAvatarPopup = document.querySelector(".profile__edit-avatar-img");
-openEditAvatarPopup.addEventListener("click", () => {
-editAvatar.open();
+
+popupAddForm.setEventListeners();
+
+openAddButton.addEventListener("click", () => {
+  popupAddForm.open();
 });
+
+// // >>>>>>>>>>>criar logica do popup EDIT AVATAR PROFILE>>>>>>>>>>>>>>>>>>
+// const editAvatar = new PopupWithForm({
+//   popupSelector: ".popup-edit",
+//   submitCallback: () => {
+//     api.editAvatar({
+//       avatarUrl: document.querySelector(".profile__edit-avatar-img").value,
+//     })
+//     .then((result) => {
+//       console.log(result);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+//   },
+// });
+// editAvatar.setEventListeners();
+// const openEditAvatarPopup = document.querySelector(".profile__edit-avatar-img");
+// openEditAvatarPopup.addEventListener("click", () => {
+// editAvatar.open();
+// });
 
 
 const formConfig = {

@@ -69,55 +69,55 @@ export default class Api {
         });
     }
 
-    likeCard() {
-        return fetch("https://around.nomoreparties.co/v1/web_ptbr_08/cards/likes/cardId", {
-          method: "PUT",
-          headers: {
-            authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
-            "Content-Type": "application/json"
-            }
-        })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        });
-      }
+    // likeCard() {
+    //     return fetch("https://around.nomoreparties.co/v1/web_ptbr_08/cards/likes/cardId", {
+    //       method: "PUT",
+    //       headers: {
+    //         authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
+    //         "Content-Type": "application/json"
+    //         }
+    //     })
+    //     .then(res => {
+    //       if (res.ok) {
+    //         return res.json();
+    //       }
+    //       return Promise.reject(`Error: ${res.status}`);
+    //     });
+    //   }
     
-      unlikeCard() {
-        return fetch("https://around.nomoreparties.co/v1/web_ptbr_08/cards/likes/cardId", {
-          method: "DELETE",
-          headers: {
-            authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
-            "Content-Type": "application/json"
-            }
-        })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        });
-      }
+    //   unlikeCard() {
+    //     return fetch("https://around.nomoreparties.co/v1/web_ptbr_08/cards/likes/cardId", {
+    //       method: "DELETE",
+    //       headers: {
+    //         authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
+    //         "Content-Type": "application/json"
+    //         }
+    //     })
+    //     .then(res => {
+    //       if (res.ok) {
+    //         return res.json();
+    //       }
+    //       return Promise.reject(`Error: ${res.status}`);
+    //     });
+    //   }
 
-    editAvatar(avatarUrl) {
-        return fetch("https://around.nomoreparties.co/v1/web_ptbr_08/users/me/avatar ", {
-            method: "PATCH",
-            headers: {
-              authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              avatar: avatarUrl,
-            })
-        })
-        .then(res => {
-            if (res.ok) {
-              return res.json();
-            }
-            return Promise.reject(`Error: ${res.status}`);
-        });
-    }
+    // editAvatar(avatarUrl) {
+    //     return fetch("https://around.nomoreparties.co/v1/web_ptbr_08/users/me/avatar ", {
+    //         method: "PATCH",
+    //         headers: {
+    //           authorization: "55ee091e-fdde-4068-8e71-e71a57ad15b5",
+    //           "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //           avatar: avatarUrl,
+    //         })
+    //     })
+    //     .then(res => {
+    //         if (res.ok) {
+    //           return res.json();
+    //         }
+    //         return Promise.reject(`Error: ${res.status}`);
+    //     });
+    // }
 }
   
