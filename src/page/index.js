@@ -13,8 +13,13 @@ import {
   inputAbout,
   openAddButton,
   selectors,
+  popupSelector,
+  imageElement,
+  captionElement,
+  cardElements,
 } from "../components/utils.js";
 import Api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 //>>>>>>>>> instancia api >>>>>>>>>>>>
 const api = new Api({
@@ -25,16 +30,29 @@ const api = new Api({
   }
 });
 
-const popupSelector = ".popup_image";
-const imageElement = document.querySelector(".popup__img-zoom");
-const captionElement = document.querySelector(".popup__description");
 const popupWithImage = new PopupWithImage(popupSelector, imageElement, captionElement, () => handleImageClick());
 popupWithImage.setEventListeners();
 
-///>>>>>>>>>>>criarção da section com initial cards>>>>>>>>>>>>>>>
+//>>>>>> POPUP DELETE CONFIRMATION >>>>>>>>>>>>>>>>
+const popupDeleteConfirmation = new PopupWithConfirmation({
+  popupSelector: ".popup_delete",
+  submitCallback: (card) => {
+    return api
+        .deleteCard(card._cardId)
+        .then(() => {
+          card.removeElement();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  },
+});
+popupDeleteConfirmation.setEventListeners();
+
+///>>>>>>>>>>>criação da section com initial cards>>>>>>>>>>>>>>>
 const cardSection = new Section({
   renderer: (cardData) => {
-    const newCard = new Card(cardData, "#template-card", popupWithImage);
+    const newCard = new Card(cardData, "#template-card", popupWithImage, () => popupDeleteConfirmation.open(newCard));
     cardSection.addItem(newCard.generateCard());
   },
 }, ".elements__card");
@@ -47,44 +65,7 @@ api.getInitialCards()
     console.log(err);
   });
 
-//>>>>>>>>>>> infos user me >>>>>>>>>>>>>>>>>>>
-  const userInfo = new UserInfo(selectors);
-
-  api.getUserInformation()
-    .then((result) => {
-      const userInformationFromServer = result;
-  
-      userInfo.setUserInfo(userInformationFromServer.name, userInformationFromServer.about);
-    })
-    .catch((err) => {
-      console.log(err); 
-    });
-
-//>>>>>>>>>>> edit profile name e about - colocar na formprofile >>>>>>>>>>>>>>>
-const popupProfile = new PopupWithForm({
-  popupSelector: ".popup",
-  submitCallback: ({ name , about }) =>
-  { 
-    api.editProfile({ name, about })
-      .then((result) => {
-        console.log(result);
-        userInfo.setUserInfo(name, about);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-});
-popupProfile.setEventListeners();
-
-openFormButton.addEventListener("click", () => {
-  const { name, about } = userInfo.getUserInfo();
-  inputName.value = name;
-  inputAbout.value = about;
-  popupProfile.open();
-});
-
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>New card>>>>>>>>>>>>>>>>>.......
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>New card>>>>>>>>>>>>>>>>>
 const popupAddForm = new PopupWithForm({
   popupSelector: ".popup-add",
   submitCallback: () => {
@@ -111,28 +92,41 @@ popupAddForm.setEventListeners();
 openAddButton.addEventListener("click", () => {
   popupAddForm.open();
 });
+//>>>>>>>>>>> infos user me >>>>>>>>>>>>>>>>>>>
+const userInfo = new UserInfo(selectors);
+api.getUserInformation()
+  .then((result) => {
+    const userInformationFromServer = result;
 
-// // >>>>>>>>>>>criar logica do popup EDIT AVATAR PROFILE>>>>>>>>>>>>>>>>>>
-// const editAvatar = new PopupWithForm({
-//   popupSelector: ".popup-edit",
-//   submitCallback: () => {
-//     api.editAvatar({
-//       avatarUrl: document.querySelector(".profile__edit-avatar-img").value,
-//     })
-//     .then((result) => {
-//       console.log(result);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//   },
-// });
-// editAvatar.setEventListeners();
-// const openEditAvatarPopup = document.querySelector(".profile__edit-avatar-img");
-// openEditAvatarPopup.addEventListener("click", () => {
-// editAvatar.open();
-// });
+    userInfo.setUserInfo(userInformationFromServer.name, userInformationFromServer.about);
+  })
+  .catch((err) => {
+    console.log(err); 
+  });
 
+//>>>>>>>>>>> edit profile name e about >>>>>>>>>>>>>>>
+const popupProfile = new PopupWithForm({
+  popupSelector: ".popup",
+  submitCallback: ({ name , about }) =>
+  { 
+    api.editProfile({ name, about })
+      .then((result) => {
+        console.log(result);
+        userInfo.setUserInfo(name, about);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+});
+popupProfile.setEventListeners();
+
+openFormButton.addEventListener("click", () => {
+  const { name, about } = userInfo.getUserInfo();
+  inputName.value = name;
+  inputAbout.value = about;
+  popupProfile.open();
+});
 
 const formConfig = {
   formSelector: ".popup__form_add",
@@ -148,4 +142,3 @@ formValidatorAdd.enableValidation();
 
 const formValidatorProfile = new FormValidator(formConfig, formProfileElement); 
 formValidatorProfile.enableValidation();
-

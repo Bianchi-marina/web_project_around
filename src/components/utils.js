@@ -10,5 +10,9 @@ export const selectors = {
   aboutSelector: ".profile__job",
 }
 
+export const popupSelector = ".popup_image";
+export const imageElement = document.querySelector(".popup__img-zoom");
+export const captionElement = document.querySelector(".popup__description");
+
 
 
