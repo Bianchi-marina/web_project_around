@@ -16,6 +16,8 @@ import {
   popupSelector,
   imageElement,
   captionElement,
+  avatarEditBtn,
+  formAvatar,
 } from "../components/utils.js";
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -95,29 +97,22 @@ openAddButton.addEventListener("click", () => {
 });
 //>>>>>>>>>>> infos user me >>>>>>>>>>>>>>>>>>>
 const userInfo = new UserInfo(selectors);
-api.getUserInformation()
-  .then((result) => {
-    const userInformationFromServer = result;
-
-    userInfo.setUserInfo(userInformationFromServer.name, userInformationFromServer.about);
-  })
-  .catch((err) => {
-    console.log(err); 
-  });
+api.getUserInfo()
+.then(({ name, about, avatar }) => {
+  userInfo.setUserInfo(name, about, avatar);
+})
+.catch((err) => {
+  console.log(err);
+});
 
 //>>>>>>>>>>> edit profile name e about >>>>>>>>>>>>>>>
 const popupProfile = new PopupWithForm({
   popupSelector: ".popup",
   submitCallback: ({ name , about }) =>
   { 
-    api.editProfile({ name, about })
-      .then((result) => {
-        console.log(result);
-        userInfo.setUserInfo(name, about);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    api.editProfile(name, about);
+    const { avatar } = userInfo.getUserInfo();
+    userInfo.setUserInfo(name, about, avatar);
   },
 });
 popupProfile.setEventListeners();
@@ -129,8 +124,24 @@ openFormButton.addEventListener("click", () => {
   popupProfile.open();
 });
 
+const popupEditAvatar = new PopupWithForm({
+  popupSelector: ".popup-edit",
+  submitCallback: ({ image }) => {
+    api.editAvatar({
+      avatar: document.querySelector(".popup__form-input_avatar").value,
+    });
+    const { name, about } = userInfo.getUserInfo();
+    userInfo.setUserInfo(name, about, image);
+  },
+});
+popupEditAvatar.setEventListeners();
+
+avatarEditBtn.addEventListener("click", () => {
+  popupEditAvatar.open();
+});
+
 const formConfig = {
-  formSelector: ".popup__form_add",
+  formSelector: ".popup__form",
   inputSelector: ".popup__form-input",
   submitButtonSelector: ".popup__button-submit",
   inactiveButtonClass: "popup__button_disabled",
@@ -143,3 +154,6 @@ formValidatorAdd.enableValidation();
 
 const formValidatorProfile = new FormValidator(formConfig, formProfileElement); 
 formValidatorProfile.enableValidation();
+
+const formValidatorAvatar = new FormValidator(formConfig, formAvatar);
+formValidatorAvatar.enableValidation();

@@ -16,22 +16,15 @@
       </header>
       <section class="profile">
         <div class="profile__view">
-          <div class="profile__avatar" >
+          <button type="button" class="profile__edit-avatar">
             <img
             class="profile__img"
             src=""
             alt="Foto de perfil do usuário"
             />
-            <!-- ADICIONEI O ICON DO EDIT AVATAR -->
-            <!-- <button type="button" class="profile__edit-avatar">
-              <img
-              class="profile__edit-avatar-img"
-              src="<%=require('./images/edit-profile-photo-icon.png')%>"
-              alt="Botão de editar a imagem do perfil do usuário"
-              />
-            </button> -->
-          <!-- ADICIONEI O ICON DO EDIT AVATAR -->
-          </div>
+          </button>
+      
+       
           <div class="profile__description">
             <h2 class="profile__name"></h2>
             <h2 class="profile__job"></h2>
@@ -172,8 +165,8 @@
         </div>
       </section>
  
-      <section class="popup popup-edit" id="editPopup">
-        <div class="popup__container"  id="cards-form">
+      <section class="popup popup-edit">
+        <div class="popup__container"   id="editAvatarPopup">
           <button type="button" class="popup__close-icon">
             <img
               class="popup__close-icon-img popup__close"
@@ -189,7 +182,7 @@
                   id="url-input"
                   placeholder="Link da Imagem"
                   type="url"
-                  class="popup__form-input popup__form-input_link"
+                  class="popup__form-input popup__form-input_avatar"
                   name="image"
                 />
                 <span class="url-input-error"></span>

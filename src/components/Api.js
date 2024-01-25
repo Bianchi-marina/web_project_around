@@ -15,7 +15,7 @@ export default class Api {
           return Promise.reject(`Error: ${res.status}`);
       });
   }
-  getUserInformation() {
+  getUserInfo() {
       return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers,
       })
@@ -26,11 +26,14 @@ export default class Api {
           return Promise.reject(`Error: ${res.status}`);
       });
   }
-  editProfile(dataProfile) {
+  editProfile(name, about) {
       return fetch(`${this._baseUrl}/users/me`, {
           method: "PATCH",
           headers: this._headers,
-          body: JSON.stringify(dataProfile)
+          body: JSON.stringify({
+            name: name,
+            about: about,
+          }),
       })
       .then(res => {
           if (res.ok) {
