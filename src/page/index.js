@@ -16,7 +16,6 @@ import {
   popupSelector,
   imageElement,
   captionElement,
-  cardElements,
 } from "../components/utils.js";
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -52,7 +51,9 @@ popupDeleteConfirmation.setEventListeners();
 ///>>>>>>>>>>>criação da section com initial cards>>>>>>>>>>>>>>>
 const cardSection = new Section({
   renderer: (cardData) => {
-    const newCard = new Card(cardData, "#template-card", popupWithImage, () => popupDeleteConfirmation.open(newCard));
+    const newCard = new Card(cardData, "#template-card", popupWithImage, () => popupDeleteConfirmation.open(newCard),
+    api.addLikes.bind(api),
+    api.removeLikes.bind(api))
     cardSection.addItem(newCard.generateCard());
   },
 }, ".elements__card");

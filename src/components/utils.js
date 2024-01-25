@@ -8,6 +8,7 @@ export const cardElements = document.querySelector(".elements__card");
 export const selectors = {
   nameSelector: ".profile__name",
   aboutSelector: ".profile__job",
+  avatarSelector: ".profile__avatar",
 }
 
 export const popupSelector = ".popup_image";
