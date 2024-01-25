@@ -182,5 +182,7 @@
     .popup__form-input {
         width: 100%;
     }
-
+    .popup__container_delete {
+        width: 200px;
+    }
 }
