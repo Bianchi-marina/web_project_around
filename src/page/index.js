@@ -22,7 +22,6 @@ import {
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
-//>>>>>>>>> instancia api >>>>>>>>>>>>
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/web_ptbr_08",
   headers: {
@@ -34,7 +33,6 @@ const api = new Api({
 const popupWithImage = new PopupWithImage(popupSelector, imageElement, captionElement, () => handleImageClick());
 popupWithImage.setEventListeners();
 
-//>>>>>> POPUP DELETE CONFIRMATION >>>>>>>>>>>>>>>>
 const popupDeleteConfirmation = new PopupWithConfirmation({
   popupSelector: ".popup_delete",
   submitCallback: (card) => {
@@ -50,7 +48,6 @@ const popupDeleteConfirmation = new PopupWithConfirmation({
 });
 popupDeleteConfirmation.setEventListeners();
 
-///>>>>>>>>>>>criação da section com initial cards>>>>>>>>>>>>>>>
 const cardSection = new Section({
   renderer: (cardData) => {
     const newCard = new Card(cardData, "#template-card", popupWithImage, () => popupDeleteConfirmation.open(newCard),
@@ -68,7 +65,6 @@ api.getInitialCards()
     console.log(err);
   });
 
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>New card>>>>>>>>>>>>>>>>>
 const popupAddForm = new PopupWithForm({
   popupSelector: ".popup-add",
   submitCallback: () => {
@@ -95,7 +91,7 @@ popupAddForm.setEventListeners();
 openAddButton.addEventListener("click", () => {
   popupAddForm.open();
 });
-//>>>>>>>>>>> infos user me >>>>>>>>>>>>>>>>>>>
+
 const userInfo = new UserInfo(selectors);
 api.getUserInfo()
 .then(({ name, about, avatar }) => {
@@ -105,7 +101,6 @@ api.getUserInfo()
   console.log(err);
 });
 
-//>>>>>>>>>>> edit profile name e about >>>>>>>>>>>>>>>
 const popupProfile = new PopupWithForm({
   popupSelector: ".popup",
   submitCallback: ({ name , about }) =>
