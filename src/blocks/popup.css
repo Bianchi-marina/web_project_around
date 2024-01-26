@@ -17,6 +17,12 @@
     transform: translate(-50%, -50%);
     border-radius: 10px;
 }
+.popup__container_delete {
+    background-color: #FFFFFF;
+    width: 430px;
+    height: 181px;
+    padding: 34px 36px;
+}
 .popup__container-img {
     position: absolute;
     top: 50%;
@@ -115,7 +121,6 @@
 .popup__button-submit:hover {
    opacity: 80%;
 }
-
 .popup__button_disabled {
     color: #b8b8b8;
     background: #fff;
@@ -177,5 +182,7 @@
     .popup__form-input {
         width: 100%;
     }
-
+    .popup__container_delete {
+        width: 200px;
+    }
 }

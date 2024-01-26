@@ -14,16 +14,27 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative; 
 }
-
+.profile__edit-avatar {
+    padding: 0;
+    background: url(../images/edit-profile-photo-icon.png) center no-repeat;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
 .profile__img {
-    width: 128px;
-    height: 128px;
-    vertical-align: middle;
+    display: flex;
+    align-self: center;
+    width: 135px;
+    height: 130px;
     border-radius: 50%;
-    margin: 0;
     object-fit: cover;
 }
+.profile__img:hover {
+    opacity: 0.2;
+}
+
 .profile__description{
     margin: 0;
     margin-left: 20px;

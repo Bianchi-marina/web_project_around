@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._popupElement = document.querySelector(popupSelector);
     this._submitCallback = submitCallback;   
     this._formElement =  this._popupElement.querySelector(".popup__form");
+    this._submitButton = this._popupElement.querySelector(".popup__button-submit");
   }
 
 
@@ -27,6 +28,18 @@ export default class PopupWithForm extends Popup {
       input.value = values[input.name];
     });
   }
+
+  _renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Salvando...";
+    }
+  }
+
+  close() {
+    super.close();
+    this._formElement.reset();
+    this._submitButton.textContent = "Salvar";
+  }
   
   setEventListeners() {
     super.setEventListeners();
@@ -34,13 +47,8 @@ export default class PopupWithForm extends Popup {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._submitCallback(this._getInputValues());
+      this._renderLoading(true);
       this.close();
     });
-  }
-  
-
-  close() {
-    super.close();
-    this._formElement.reset();
   }
 }
