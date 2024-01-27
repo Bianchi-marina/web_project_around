@@ -48,18 +48,41 @@ const popupDeleteConfirmation = new PopupWithConfirmation({
 });
 popupDeleteConfirmation.setEventListeners();
 
-const cardSection = new Section({
-  renderer: (cardData) => {
-    const newCard = new Card(cardData, "#template-card", popupWithImage, () => popupDeleteConfirmation.open(newCard),
+const userInfo = new UserInfo(selectors);
+api.getUserInfo()
+.then(({ name, about, avatar }) => {
+  userInfo.setUserInfo(name, about, avatar);
+})
+.catch((err) => {
+  console.log(err);
+});
+
+const renderNewCard = (item) => {
+  const card = new Card(
+    item,
+    "#template-card",
+    popupWithImage,
+    () => {
+      popupDeleteConfirmation.open(card);
+    },
     api.addLikes.bind(api),
-    api.removeLikes.bind(api))
-    cardSection.addItem(newCard.generateCard());
-  },
-}, ".elements__card");
+    api.removeLikes.bind(api)
+  );
+  return card.generateCard();
+};
 
 api.getInitialCards()
   .then((result) => {
-    cardSection.render(result);
+    const defaultCardList = new Section(
+      {
+        items: result,
+        renderer: (item) => {
+          defaultCardList.addItem(renderNewCard(item));
+        },
+      },
+      ".elements__card"
+    );
+    defaultCardList.renderItems();
   })
   .catch((err) => {
     console.log(err);
@@ -74,15 +97,14 @@ const popupAddForm = new PopupWithForm({
     };
 
     api.createNewCard(cardData)
-    .then(() => {
-      return api.getInitialCards();
-    })
-    .then((updatedData) => {
-      cardSection.render(updatedData);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((result) => {
+        document
+          .querySelector(".elements__card")
+          .prepend(renderNewCard(result));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 });
 
@@ -90,15 +112,6 @@ popupAddForm.setEventListeners();
 
 openAddButton.addEventListener("click", () => {
   popupAddForm.open();
-});
-
-const userInfo = new UserInfo(selectors);
-api.getUserInfo()
-.then(({ name, about, avatar }) => {
-  userInfo.setUserInfo(name, about, avatar);
-})
-.catch((err) => {
-  console.log(err);
 });
 
 const popupProfile = new PopupWithForm({

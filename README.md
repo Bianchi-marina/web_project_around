@@ -38,6 +38,4 @@ Each card now contains interactive buttons for liking and deleting. Users can ex
 Feel free to explore these new features and provide any feedback or suggestions.
 Happy collaborating!
 
-
-
-
+GitHub Pages: https://bianchi-marina.github.io/web_project_around/

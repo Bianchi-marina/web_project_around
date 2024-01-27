@@ -106,6 +106,10 @@
     margin: 0;
     margin-top: 40px;
 }
+.popup__form-input_avatar {
+    margin: 0;
+    margin-top: 40px;
+}
 .popup__button-submit { 
     margin-top: 64px;
     cursor: pointer;

@@ -16,50 +16,49 @@ export default class Api {
     });
   }
   getUserInfo() {
-      return fetch(`${this._baseUrl}/users/me`, {
-        headers: this._headers,
-      })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-      });
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    })
+    .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+    });
   }
   editProfile(name, about) {
-      return fetch(`${this._baseUrl}/users/me`, {
-          method: "PATCH",
-          headers: this._headers,
-          body: JSON.stringify({
-            name: name,
-            about: about,
-          }),
-      })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-      });
+    return fetch(`${this._baseUrl}/users/me`, {
+        method: "PATCH",
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          about: about,
+        }),
+    })
+    .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+    });
   }
-  createNewCard(dataCard) {
-      return fetch(`${this._baseUrl}/cards`, {
-          method: "POST",
-          headers: this._headers,
-          body: JSON.stringify({
-            name: dataCard.name,
-            link: dataCard.link
-          })
-      })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-      });
+  createNewCard({ name, link}) {
+    return fetch(`${this._baseUrl}/cards`, {
+        method: "POST",
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          link: link,
+        })
+    })
+    .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+    });
   }
   deleteCard(cardId) {
-    console.log("cardId", cardId);
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,

@@ -32,7 +32,7 @@ export default class Card {
     this._setEventListeners();
     this.likeClick();
     this._element.querySelector(".elements__card-img").src = this._link;
-    this._element.querySelector(".elements__card-name").alt = this._name;
+    this._element.querySelector(".elements__card-img").alt = this._name;
     this._element.querySelector(".elements__card-name").textContent = this._name;
     this._element.querySelector(".elements__like-count").textContent = this._likes.length;
 
